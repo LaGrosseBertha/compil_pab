@@ -1,0 +1,474 @@
+Terminaux inutilisés dans la grammaire
+
+   PO
+   PF
+
+
+Grammaire
+
+    0 $accept: programme $end
+
+    1 programme: PROG corps
+
+    2 corps: liste_declarations
+
+    3 liste_declarations: %empty
+    4                   | liste_declarations declaration PV
+
+    5 declaration: declaration_type
+    6            | declaration_variable
+
+    7 declaration_type: TYPE IDF DEUX_POINTS suite_declaration_type
+
+    8 suite_declaration_type: STRUCT liste_champs FSTRUCT
+    9                       | TABLEAU dimension DE nom_type
+
+   10 dimension: CO liste_dimensions CF
+
+   11 liste_dimensions: une_dimension
+   12                 | liste_dimensions VIRGULE une_dimension
+
+   13 une_dimension: expression POINT POINT expression
+
+   14 expression: IDF
+
+   15 liste_champs: un_champ PV
+   16             | liste_champs un_champ PV
+
+   17 un_champ: IDF DEUX_POINTS nom_type
+
+   18 nom_type: type_simple
+   19         | IDF
+
+   20 type_simple: INT
+
+   21 declaration_variable: VAR IDF DEUX_POINTS nom_type
+
+
+Terminaux, suivis des règles où ils apparaissent
+
+$end (0) 0
+error (256)
+PROG (258) 1
+VIRGULE (259) 12
+POINT (260) 13
+PV (261) 4 15 16
+DEUX_POINTS (262) 7 17 21
+CO (263) 10
+CF (264) 10
+PO (265)
+PF (266)
+TYPE (267) 7
+INT (268) 20
+IDF (269) 7 14 17 19 21
+VAR (270) 21
+DE (271) 9
+TABLEAU (272) 9
+STRUCT (273) 8
+FSTRUCT (274) 8
+
+
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (20)
+    à gauche: 0
+programme (21)
+    à gauche: 1, à droite: 0
+corps (22)
+    à gauche: 2, à droite: 1
+liste_declarations (23)
+    à gauche: 3 4, à droite: 2 4
+declaration (24)
+    à gauche: 5 6, à droite: 4
+declaration_type (25)
+    à gauche: 7, à droite: 5
+suite_declaration_type (26)
+    à gauche: 8 9, à droite: 7
+dimension (27)
+    à gauche: 10, à droite: 9
+liste_dimensions (28)
+    à gauche: 11 12, à droite: 10 12
+une_dimension (29)
+    à gauche: 13, à droite: 11 12
+expression (30)
+    à gauche: 14, à droite: 13
+liste_champs (31)
+    à gauche: 15 16, à droite: 8 16
+un_champ (32)
+    à gauche: 17, à droite: 15 16
+nom_type (33)
+    à gauche: 18 19, à droite: 9 17 21
+type_simple (34)
+    à gauche: 20, à droite: 18
+declaration_variable (35)
+    à gauche: 21, à droite: 6
+
+
+État 0
+
+    0 $accept: . programme $end
+
+    PROG  décalage et aller à l'état 1
+
+    programme  aller à l'état 2
+
+
+État 1
+
+    1 programme: PROG . corps
+
+    $défaut  réduction par utilisation de la règle 3 (liste_declarations)
+
+    corps               aller à l'état 3
+    liste_declarations  aller à l'état 4
+
+
+État 2
+
+    0 $accept: programme . $end
+
+    $end  décalage et aller à l'état 5
+
+
+État 3
+
+    1 programme: PROG corps .
+
+    $défaut  réduction par utilisation de la règle 1 (programme)
+
+
+État 4
+
+    2 corps: liste_declarations .
+    4 liste_declarations: liste_declarations . declaration PV
+
+    TYPE  décalage et aller à l'état 6
+    VAR   décalage et aller à l'état 7
+
+    $défaut  réduction par utilisation de la règle 2 (corps)
+
+    declaration           aller à l'état 8
+    declaration_type      aller à l'état 9
+    declaration_variable  aller à l'état 10
+
+
+État 5
+
+    0 $accept: programme $end .
+
+    $défaut  accepter
+
+
+État 6
+
+    7 declaration_type: TYPE . IDF DEUX_POINTS suite_declaration_type
+
+    IDF  décalage et aller à l'état 11
+
+
+État 7
+
+   21 declaration_variable: VAR . IDF DEUX_POINTS nom_type
+
+    IDF  décalage et aller à l'état 12
+
+
+État 8
+
+    4 liste_declarations: liste_declarations declaration . PV
+
+    PV  décalage et aller à l'état 13
+
+
+État 9
+
+    5 declaration: declaration_type .
+
+    $défaut  réduction par utilisation de la règle 5 (declaration)
+
+
+État 10
+
+    6 declaration: declaration_variable .
+
+    $défaut  réduction par utilisation de la règle 6 (declaration)
+
+
+État 11
+
+    7 declaration_type: TYPE IDF . DEUX_POINTS suite_declaration_type
+
+    DEUX_POINTS  décalage et aller à l'état 14
+
+
+État 12
+
+   21 declaration_variable: VAR IDF . DEUX_POINTS nom_type
+
+    DEUX_POINTS  décalage et aller à l'état 15
+
+
+État 13
+
+    4 liste_declarations: liste_declarations declaration PV .
+
+    $défaut  réduction par utilisation de la règle 4 (liste_declarations)
+
+
+État 14
+
+    7 declaration_type: TYPE IDF DEUX_POINTS . suite_declaration_type
+
+    TABLEAU  décalage et aller à l'état 16
+    STRUCT   décalage et aller à l'état 17
+
+    suite_declaration_type  aller à l'état 18
+
+
+État 15
+
+   21 declaration_variable: VAR IDF DEUX_POINTS . nom_type
+
+    INT  décalage et aller à l'état 19
+    IDF  décalage et aller à l'état 20
+
+    nom_type     aller à l'état 21
+    type_simple  aller à l'état 22
+
+
+État 16
+
+    9 suite_declaration_type: TABLEAU . dimension DE nom_type
+
+    CO  décalage et aller à l'état 23
+
+    dimension  aller à l'état 24
+
+
+État 17
+
+    8 suite_declaration_type: STRUCT . liste_champs FSTRUCT
+
+    IDF  décalage et aller à l'état 25
+
+    liste_champs  aller à l'état 26
+    un_champ      aller à l'état 27
+
+
+État 18
+
+    7 declaration_type: TYPE IDF DEUX_POINTS suite_declaration_type .
+
+    $défaut  réduction par utilisation de la règle 7 (declaration_type)
+
+
+État 19
+
+   20 type_simple: INT .
+
+    $défaut  réduction par utilisation de la règle 20 (type_simple)
+
+
+État 20
+
+   19 nom_type: IDF .
+
+    $défaut  réduction par utilisation de la règle 19 (nom_type)
+
+
+État 21
+
+   21 declaration_variable: VAR IDF DEUX_POINTS nom_type .
+
+    $défaut  réduction par utilisation de la règle 21 (declaration_variable)
+
+
+État 22
+
+   18 nom_type: type_simple .
+
+    $défaut  réduction par utilisation de la règle 18 (nom_type)
+
+
+État 23
+
+   10 dimension: CO . liste_dimensions CF
+
+    IDF  décalage et aller à l'état 28
+
+    liste_dimensions  aller à l'état 29
+    une_dimension     aller à l'état 30
+    expression        aller à l'état 31
+
+
+État 24
+
+    9 suite_declaration_type: TABLEAU dimension . DE nom_type
+
+    DE  décalage et aller à l'état 32
+
+
+État 25
+
+   17 un_champ: IDF . DEUX_POINTS nom_type
+
+    DEUX_POINTS  décalage et aller à l'état 33
+
+
+État 26
+
+    8 suite_declaration_type: STRUCT liste_champs . FSTRUCT
+   16 liste_champs: liste_champs . un_champ PV
+
+    IDF      décalage et aller à l'état 25
+    FSTRUCT  décalage et aller à l'état 34
+
+    un_champ  aller à l'état 35
+
+
+État 27
+
+   15 liste_champs: un_champ . PV
+
+    PV  décalage et aller à l'état 36
+
+
+État 28
+
+   14 expression: IDF .
+
+    $défaut  réduction par utilisation de la règle 14 (expression)
+
+
+État 29
+
+   10 dimension: CO liste_dimensions . CF
+   12 liste_dimensions: liste_dimensions . VIRGULE une_dimension
+
+    VIRGULE  décalage et aller à l'état 37
+    CF       décalage et aller à l'état 38
+
+
+État 30
+
+   11 liste_dimensions: une_dimension .
+
+    $défaut  réduction par utilisation de la règle 11 (liste_dimensions)
+
+
+État 31
+
+   13 une_dimension: expression . POINT POINT expression
+
+    POINT  décalage et aller à l'état 39
+
+
+État 32
+
+    9 suite_declaration_type: TABLEAU dimension DE . nom_type
+
+    INT  décalage et aller à l'état 19
+    IDF  décalage et aller à l'état 20
+
+    nom_type     aller à l'état 40
+    type_simple  aller à l'état 22
+
+
+État 33
+
+   17 un_champ: IDF DEUX_POINTS . nom_type
+
+    INT  décalage et aller à l'état 19
+    IDF  décalage et aller à l'état 20
+
+    nom_type     aller à l'état 41
+    type_simple  aller à l'état 22
+
+
+État 34
+
+    8 suite_declaration_type: STRUCT liste_champs FSTRUCT .
+
+    $défaut  réduction par utilisation de la règle 8 (suite_declaration_type)
+
+
+État 35
+
+   16 liste_champs: liste_champs un_champ . PV
+
+    PV  décalage et aller à l'état 42
+
+
+État 36
+
+   15 liste_champs: un_champ PV .
+
+    $défaut  réduction par utilisation de la règle 15 (liste_champs)
+
+
+État 37
+
+   12 liste_dimensions: liste_dimensions VIRGULE . une_dimension
+
+    IDF  décalage et aller à l'état 28
+
+    une_dimension  aller à l'état 43
+    expression     aller à l'état 31
+
+
+État 38
+
+   10 dimension: CO liste_dimensions CF .
+
+    $défaut  réduction par utilisation de la règle 10 (dimension)
+
+
+État 39
+
+   13 une_dimension: expression POINT . POINT expression
+
+    POINT  décalage et aller à l'état 44
+
+
+État 40
+
+    9 suite_declaration_type: TABLEAU dimension DE nom_type .
+
+    $défaut  réduction par utilisation de la règle 9 (suite_declaration_type)
+
+
+État 41
+
+   17 un_champ: IDF DEUX_POINTS nom_type .
+
+    $défaut  réduction par utilisation de la règle 17 (un_champ)
+
+
+État 42
+
+   16 liste_champs: liste_champs un_champ PV .
+
+    $défaut  réduction par utilisation de la règle 16 (liste_champs)
+
+
+État 43
+
+   12 liste_dimensions: liste_dimensions VIRGULE une_dimension .
+
+    $défaut  réduction par utilisation de la règle 12 (liste_dimensions)
+
+
+État 44
+
+   13 une_dimension: expression POINT POINT . expression
+
+    IDF  décalage et aller à l'état 28
+
+    expression  aller à l'état 45
+
+
+État 45
+
+   13 une_dimension: expression POINT POINT expression .
+
+    $défaut  réduction par utilisation de la règle 13 (une_dimension)
